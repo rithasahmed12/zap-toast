@@ -1,3 +1,5 @@
+## Zap Toast
+
 ```markdown
 # React Zap Toast
 
