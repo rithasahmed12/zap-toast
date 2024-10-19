@@ -1,6 +1,6 @@
 {
   "name": "react-zaptoast",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "React Toast Snap is a simple and customizable toast notification component for React applications.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

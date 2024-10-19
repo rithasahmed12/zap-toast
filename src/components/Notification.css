@@ -3,25 +3,103 @@
   outline: none;
   /* A11y */
   padding: 15px;
-  margin: 10px;
-  color: white;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  color: #ffffff;
+  font-family: 'Arial', sans-serif;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  justify-content: space-between;
 }
 
-.success {
-  background-color: #4caf50;
+.notification-content {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
 }
-.info {
-  background-color: #2196f3;
+
+.notification-message {
+  margin-left: 10px;
+  font-size: 14px;
 }
-.warning {
-  background-color: #ff9800;
+
+.notification.success {
+  background: linear-gradient(135deg, #43a047, #66bb6a);
 }
-.error {
-  background-color: #f44336;
+
+.notification.error {
+  background: linear-gradient(135deg, #e53935, #ef5350);
+}
+
+.notification.info {
+  background: linear-gradient(135deg, #1e88e5, #42a5f5);
+}
+
+.notification.warning {
+  background: linear-gradient(135deg, #fb8c00, #ffa726);
+}
+
+.notification.default {
+  background: linear-gradient(135deg, #546e7a, #78909c);
+}
+
+.closeBtn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.closeBtn:hover {
+  opacity: 1;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.slide {
+  animation: slideIn 0.3s ease-out;
+}
+
+.fade {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.pop {
+  animation: scaleIn 0.3s ease-out;
 }
 
 /* Positioning */
@@ -50,66 +128,32 @@
 }
 
 .notification-container {
+  position: fixed;
+  z-index: 9999;
   display: flex;
-  /* Stack notifications from bottom to top */
-  align-items: flex-end; /* Align notifications to the right */
-}
-
-.notification-container.bottom {
-  flex-direction: column-reverse;
-}
-.notification-container.top {
   flex-direction: column;
-}
-/* Positioning */
-
-.closeBtn {
-  margin-left: 5px;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
+  max-width: 350px;
+  width: 100%;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.notification-container.top-right {
+  top: 20px;
+  right: 20px;
 }
 
-@keyframes popup {
-  from {
-    transform: scale(0.5);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+.notification-container.top-left {
+  top: 20px;
+  left: 20px;
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
+.notification-container.bottom-right {
+  bottom: 20px;
+  right: 20px;
 }
 
-.fadeIn {
-  animation: fadeIn 0.5s;
+.notification-container.bottom-left {
+  bottom: 20px;
+  left: 20px;
 }
-.popup {
-  animation: popup 0.5s ease-out;
-}
-.slideIn {
-  animation: slideIn 0.5s ease-out;
-}
+
 /* Animations */

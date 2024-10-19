@@ -1,27 +1,34 @@
-export interface NotificationProps {
-  type: "success" | "info" | "warning" | "error";
-  message: string;
-  onClose: () => void;
-  animation?: "fade" | "pop" | "slide";
-}
+export type NotificationType = "success" | "error" | "info" | "warning" | "default";
+export type PositionType = "top-left" | "top-right" | "bottom-left" | "bottom-right";
+export type AnimationType = "fade" | "pop" | "slide";
 
-// Define the allowed positions
-export type PositionType =
-  | "bottom-left"
-  | "bottom-right"
-  | "top-left"
-  | "top-right";
-
-// Define the properties of a notification
 export interface NotificationProps {
-  type: "success" | "info" | "warning" | "error";
+  type: NotificationType;
   message: string;
   duration: number;
-  animation?: "fade" | "pop" | "slide";
+  onClose: () => void;
+  animation?: AnimationType;
+  position: PositionType;
 }
 
-// Define the return type of the hook
-export interface UseNotificationReturn {
-  NotificationComponent: JSX.Element;
-  triggerNotification: (notificationProps: NotificationProps) => void;
+export interface ToastOptions {
+  type?: NotificationType;
+  duration?: number;
+  animation?: AnimationType;
+  position?: PositionType;
 }
+
+export interface UseNotificationReturn {
+  dismiss: (id: string) => void;
+  dismissAll: () => void;
+  NotificationContainer: JSX.Element;
+  toast: ToastFunction;
+}
+
+export type ToastFunction = {
+  (message: string, options?: ToastOptions): string;
+  success: (message: string, options?: Partial<ToastOptions>) => string;
+  error: (message: string, options?: Partial<ToastOptions>) => string;
+  info: (message: string, options?: Partial<ToastOptions>) => string;
+  warning: (message: string, options?: Partial<ToastOptions>) => string;
+};

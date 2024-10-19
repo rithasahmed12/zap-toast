@@ -9,27 +9,21 @@ import {
 import "./Notification.css";
 import { NotificationProps } from "./types";
 
-const iconStyles: React.CSSProperties = { marginRight: "10px" };
+const iconStyles: React.CSSProperties = { marginRight: "10px", fontSize: "20px" };
 const icons: Record<string, JSX.Element> = {
   success: <AiOutlineCheckCircle style={iconStyles} />,
   info: <AiOutlineInfoCircle style={iconStyles} />,
   warning: <AiOutlineWarning style={iconStyles} />,
   error: <AiOutlineCloseCircle style={iconStyles} />,
-};
-
-const animations: Record<string, string> = {
-  fade: "fadeIn",
-  pop: "popup",
-  slide: "slideIn",
+  default: <AiOutlineInfoCircle style={iconStyles} />,
 };
 
 const Notification: React.FC<NotificationProps> = ({
-  type = "info",
+  type = "default",
   message,
   onClose,
   animation = "slide",
 }) => {
-  // A11y
   const notificationRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -41,21 +35,21 @@ const Notification: React.FC<NotificationProps> = ({
   const ariaRole = type === "error" || type === "warning" ? "alert" : "status";
   const ariaLive =
     type === "error" || type === "warning" ? "assertive" : "polite";
-  // A11y
 
   return (
     <div
-      className={`notification ${type} ${animations[animation]}`}
-      // A11y
+      className={`notification ${type} ${animation}`}
       role={ariaRole}
       aria-live={ariaLive}
       tabIndex={-1}
       ref={notificationRef}
-      // A11y
     >
-      {icons[type]} {message}
-      <button className="closeBtn" onClick={() => onClose()}>
-        <AiOutlineClose color="white" />
+      <div className="notification-content">
+        {icons[type]}
+        <span className="notification-message">{message}</span>
+      </div>
+      <button className="closeBtn" onClick={onClose} aria-label="Close notification">
+        <AiOutlineClose />
       </button>
     </div>
   );
